@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ocean Hazard - Incidents</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: white;
+    }
+    header {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0,0,0,0.6);
+    }
+    .incident-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+    .incident-card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 1rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      backdrop-filter: blur(6px);
+    }
+    .incident-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    }
+    .incident-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .status {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .submitted { background: orange; }
+    .verified { background: green; }
+    .flagged { background: red; }
+    .prediction {
+      margin: 0.5rem 0;
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: #00e0ff;
+    }
+    .actions button {
+      background: none;
+      border: 2px solid #00e0ff;
+      color: #00e0ff;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      margin: 0.3rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .actions button:hover {
+      background: #00e0ff;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌊 Ocean Hazard - Reported Incidents</h1>
+    <p>Live & Verified Incidents with Prediction Rates</p>
+  </header>
+  
+  <section class="incident-container">
+    <!-- Incident 1 -->
+    <div class="incident-card">
+      <img src="https://source.unsplash.com/600x400/?oil,spill" alt="Incident Image">
+      <span class="status submitted">Submitted</span>
+      <h2>Oil Spill in Arabian Sea</h2>
+      <p>📍 Location: Mumbai Coast<br>📅 Date: Sept 18, 2025</p>
+      <p class="prediction">Prediction Rate: 72%</p>
+      <div class="actions">
+        <button>Verify</button>
+        <button>Flag</button>
+        <button>Delete</button>
+      </div>
+    </div>
+
+    <!-- Incident 2 -->
+    <div class="incident-card">
+      <img src="https://source.unsplash.com/600x400/?ocean,disaster" alt="Incident Image">
+      <span class="status verified">Verified</span>
+      <h2>Fishing Boat Accident</h2>
+      <p>📍 Location: Kerala<br>📅 Date: Sept 16, 2025</p>
+      <p class="prediction">Prediction Rate: 89%</p>
+      <div class="actions">
+        <button>Verify</button>
+        <button>Flag</button>
+        <button>Delete</button>
+      </div>
+    </div>
+
+    <!-- Incident 3 -->
+    <div class="incident-card">
+      <img src="https://source.unsplash.com/600x400/?marine,oil" alt="Incident Image">
+      <span class="status flagged">Flagged</span>
+      <h2>Plastic Waste Dump</h2>
+      <p>📍 Location: Chennai<br>📅 Date: Sept 10, 2025</p>
+      <p class="prediction">Prediction Rate: 65%</p>
+      <div class="actions">
+        <button>Verify</button>
+        <button>Flag</button>
+        <button>Delete</button>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

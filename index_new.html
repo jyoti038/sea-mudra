@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seamudra | Ocean Hazard Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .animate-fadeIn {
+            animation: fadeIn 1.5s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .nav-btn {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        .nav-btn:hover::after {
+            width: 100%;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .incident-card {
+            background: linear-gradient(145deg, #ffffff, #f0f4f8);
+            border-left: 5px solid #3b82f6;
+            transition: all 0.4s ease;
+        }
+        .incident-card:hover {
+            border-left-color: #ef4444;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-900 to-blue-700 shadow-xl z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center p-6">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl font-bold text-white">🌊</span>
+                <h1 class="text-2xl font-bold text-white">Seamudra</h1>
+            </div>
+            <ul class="flex space-x-8 text-white font-semibold">
+                <li><a href="feed.html" class="nav-btn">Live Feed</a></li>
+                <li><a href="reports.html" class="nav-btn">Incident Insights</a></li>
+                <li><a href="map.html" class="nav-btn">Hazard Map</a></li>
+                <li><a href="submit.html" class="nav-btn">Submit Incidents</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
+        <img src="images\Guardians of the Ocean.png" 
+             class="absolute w-full h-full object-cover opacity-80" alt="Ocean Waves">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/70 to-transparent"></div>
+        <div class="relative z-10 space-y-8 animate-fadeIn text-center max-w-3xl mx-auto px-4">
+            <h2 class="text-5xl font-extrabold tracking-tight drop-shadow-lg">Guardians of the Ocean</h2>
+            <p class="text-xl drop-shadow-md">A unified platform for real-time hazard alerts, community reports, and verified marine intelligence.</p>
+            <a href="dashboard_new.html" class="bg-blue-600 hover:bg-blue-800 transition-all duration-300 px-8 py-4 rounded-full font-bold text-lg shadow-lg transform hover:scale-105">Explore Feed</a>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-100 text-center">
+        <h2 class="text-3xl font-bold mb-6 text-blue-900">🌐 Our Mission</h2>
+        <p class="max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed px-4">
+            Seamudra is committed to fostering a global community dedicated to marine safety. We provide the tools for swift, accurate reporting of ocean incidents and aim to create a transparent network that protects our invaluable marine ecosystems.
+        </p>
+    </section>
+
+    <section id="feed" class="py-16 max-w-7xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-10 text-blue-900">🚨 Live Hazard Feed</h2>
+        <div class="flex gap-8 overflow-x-auto px-6">
+            <div class="bg-white shadow-lg rounded-xl overflow-hidden transition-all duration-300 card-hover min-w-[300px]">
+                <img src="images\Major Oil Spill near Mumbai.png" class="h-56 w-full object-cover" alt="Oil Spill">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-gray-800 truncate">Major Oil Spill near Mumbai</h3>
+                    <p class="text-gray-600 mt-2 text-sm">Large-scale spill reported; cleanup operations initiated. Verified via satellite data.</p>
+                    <div class="flex items-center justify-between mt-4">
+                        <span class="text-sm font-semibold bg-red-500 text-white px-3 py-1 rounded-full">High Impact</span>
+                        <span class="text-xs text-gray-500">Source: Community Report</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-xl overflow-hidden transition-all duration-300 card-hover min-w-[300px]">
+                <img src="images\Plastic Dumping in Chennai Bay.png" class="h-56 w-full object-cover" alt="Plastic Pollution">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-gray-800 truncate">Plastic Dumping in Chennai Bay</h3>
+                    <p class="text-gray-600 mt-2 text-sm">Significant plastic accumulation detected, raising major environmental concerns.</p>
+                    <div class="flex items-center justify-between mt-4">
+                        <span class="text-sm font-semibold bg-yellow-500 text-white px-3 py-1 rounded-full">Moderate Impact</span>
+                        <span class="text-xs text-gray-500">Source: AI Monitor</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-xl overflow-hidden transition-all duration-300 card-hover min-w-[300px]">
+                <img src="images\Coastal Flooding in Goa.png" class="h-56 w-full object-cover" alt="Flood">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-gray-800 truncate">Coastal Flooding in Goa</h3>
+                    <p class="text-gray-600 mt-2 text-sm">Heavy rainfall and storm surge lead to mild flooding in low-lying coastal areas.</p>
+                    <div class="flex items-center justify-between mt-4">
+                        <span class="text-sm font-semibold bg-green-500 text-white px-3 py-1 rounded-full">Low Impact</span>
+                        <span class="text-xs text-gray-500">Source: Official Alert</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="incidents" class="py-20 bg-white">
+        <h2 class="text-3xl font-bold text-center mb-12 text-blue-900">Incident Insights</h2>
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold mb-6 text-blue-900">Hazard Statistics</h3>
+                <canvas id="incidentChart" height="200"></canvas>
+            </div>
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold mb-6 text-blue-900">Recent Incidents</h3>
+                <div class="space-y-6">
+                    <div class="incident-card p-6 rounded-lg">
+                        <h4 class="text-lg font-bold text-red-600">Oil Spill - Mumbai</h4>
+                        <p class="text-gray-600">High impact event verified by satellite. Cleanup in progress. Updated: 2 hours ago.</p>
+                    </div>
+                    <div class="incident-card p-6 rounded-lg">
+                        <h4 class="text-lg font-bold text-yellow-600">Plastic Dump - Chennai</h4>
+                        <p class="text-gray-600">Moderate pollution detected via AI. Environmental assessment ongoing. Updated: 5 hours ago.</p>
+                    </div>
+                    <div class="incident-card p-6 rounded-lg">
+                        <h4 class="text-lg font-bold text-green-600">Flooding - Goa</h4>
+                        <p class="text-gray-600">Low impact flooding resolved. Post-event analysis available. Updated: 8 hours ago.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white text-center py-6">
+        <p class="font-semibold text-lg">Seamudra</p>
+        <p class="mt-2 text-sm text-gray-400">© 2025 All rights reserved | Built with passion for a cleaner ocean.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Chart.js for Hazard Statistics
+        new Chart(document.getElementById('incidentChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Oil Spills', 'Pollution', 'Floods'],
+                datasets: [{
+                    data: [30, 40, 20],
+                    backgroundColor: ['#ef4444', '#f59e0b', '#22c55e']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

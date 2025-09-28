@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seamudra | Minimal Feed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f4f8; }
+        .feed-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 1rem; padding: 2rem 0; }
+        .feed-card { flex: 0 0 300px; scroll-snap-align: start; background: white; border-radius: 1rem; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
+        .feed-card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .like-btn, .comment-btn { transition: all 0.2s; cursor: pointer; }
+        .like-btn:hover { transform: scale(1.05); background-color: #2563eb; color: white; }
+        .comment-btn:hover { transform: scale(1.05); background-color: #e2e8f0; }
+    </style>
+</head>
+<body class="text-gray-900">
+
+<nav class="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-900 to-blue-700 shadow-xl z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+        <h1 class="text-2xl font-bold text-white">🌊 Seamudra</h1>
+        <ul class="flex space-x-6 text-white font-semibold">
+            <li><a href="index_new.html">Home</a></li>
+            <li><a href="reports.html">Incidents</a></li>
+            <li><a href="submit.html">Submit Incident</a></li>
+            <li><a href="map.html">Map</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="pt-24 max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-blue-900 mb-6">🚨 Live Ocean Hazard Feed</h2>
+    <div class="feed-container">
+
+        <div class="feed-card">
+            <h3 class="font-semibold text-gray-800 text-lg mb-2">Oil Spill near Mumbai</h3>
+            <p class="text-gray-600 text-sm mb-3">Major oil spill reported. Cleanup ongoing.</p>
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-semibold bg-red-500 text-white px-2 py-1 rounded-full">Critical</span>
+                <span class="text-xs text-gray-500">Prediction: 92%</span>
+            </div>
+            <div class="flex justify-between">
+                <button onclick="likePost(this)" class="like-btn bg-blue-500 text-white px-3 py-1 rounded-full text-xs">👍 Like <span class="like-count">0</span></button>
+                <button onclick="commentPost(this)" class="comment-btn bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-xs">💬 Comment</button>
+            </div>
+        </div>
+
+        <div class="feed-card">
+            <h3 class="font-semibold text-gray-800 text-lg mb-2">Cyclone Alert Odisha</h3>
+            <p class="text-gray-600 text-sm mb-3">Cyclone approaching coast, evacuation advised.</p>
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-semibold bg-orange-500 text-white px-2 py-1 rounded-full">High</span>
+                <span class="text-xs text-gray-500">Prediction: 85%</span>
+            </div>
+            <div class="flex justify-between">
+                <button onclick="likePost(this)" class="like-btn bg-blue-500 text-white px-3 py-1 rounded-full text-xs">👍 Like <span class="like-count">0</span></button>
+                <button onclick="commentPost(this)" class="comment-btn bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-xs">💬 Comment</button>
+            </div>
+        </div>
+
+        <div class="feed-card">
+            <h3 class="font-semibold text-gray-800 text-lg mb-2">Flooding in Kerala</h3>
+            <p class="text-gray-600 text-sm mb-3">Heavy rainfall causes local flooding in coastal areas.</p>
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-semibold bg-yellow-500 text-white px-2 py-1 rounded-full">Moderate</span>
+                <span class="text-xs text-gray-500">Prediction: 78%</span>
+            </div>
+            <div class="flex justify-between">
+                <button onclick="likePost(this)" class="like-btn bg-blue-500 text-white px-3 py-1 rounded-full text-xs">👍 Like <span class="like-count">0</span></button>
+                <button onclick="commentPost(this)" class="comment-btn bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-xs">💬 Comment</button>
+            </div>
+        </div>
+ <div class="feed-card">
+            <h3 class="font-semibold text-gray-800 text-lg mb-2">Oil Spill near Mumbai</h3>
+            <p class="text-gray-600 text-sm mb-3">Major oil spill reported. Cleanup ongoing.</p>
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-semibold bg-red-500 text-white px-2 py-1 rounded-full">Critical</span>
+                <span class="text-xs text-gray-500">Prediction: 92%</span>
+            </div>
+            <div class="flex justify-between">
+                <button onclick="likePost(this)" class="like-btn bg-blue-500 text-white px-3 py-1 rounded-full text-xs">👍 Like <span class="like-count">0</span></button>
+                <button onclick="commentPost(this)" class="comment-btn bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-xs">💬 Comment</button>
+            </div>
+        </div>
+
+          <div class="feed-card">
+            <h3 class="font-semibold text-gray-800 text-lg mb-2">Flooding in Kerala</h3>
+            <p class="text-gray-600 text-sm mb-3">Heavy rainfall causes local flooding in coastal areas.</p>
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-semibold bg-yellow-500 text-white px-2 py-1 rounded-full">Moderate</span>
+                <span class="text-xs text-gray-500">Prediction: 78%</span>
+            </div>
+            <div class="flex justify-between">
+                <button onclick="likePost(this)" class="like-btn bg-blue-500 text-white px-3 py-1 rounded-full text-xs">👍 Like <span class="like-count">0</span></button>
+                <button onclick="commentPost(this)" class="comment-btn bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-xs">💬 Comment</button>
+            </div>
+        </div>
+
+         <div class="feed-card">
+            <h3 class="font-semibold text-gray-800 text-lg mb-2">Cyclone Alert Odisha</h3>
+            <p class="text-gray-600 text-sm mb-3">Cyclone approaching coast, evacuation advised.</p>
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-semibold bg-orange-500 text-white px-2 py-1 rounded-full">High</span>
+                <span class="text-xs text-gray-500">Prediction: 85%</span>
+            </div>
+            <div class="flex justify-between">
+                <button onclick="likePost(this)" class="like-btn bg-blue-500 text-white px-3 py-1 rounded-full text-xs">👍 Like <span class="like-count">0</span></button>
+                <button onclick="commentPost(this)" class="comment-btn bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-xs">💬 Comment</button>
+            </div>
+        </div>
+
+         <div class="feed-card">
+            <h3 class="font-semibold text-gray-800 text-lg mb-2">Cyclone Alert Odisha</h3>
+            <p class="text-gray-600 text-sm mb-3">Cyclone approaching coast, evacuation advised.</p>
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-semibold bg-orange-500 text-white px-2 py-1 rounded-full">High</span>
+                <span class="text-xs text-gray-500">Prediction: 85%</span>
+            </div>
+            <div class="flex justify-between">
+                <button onclick="likePost(this)" class="like-btn bg-blue-500 text-white px-3 py-1 rounded-full text-xs">👍 Like <span class="like-count">0</span></button>
+                <button onclick="commentPost(this)" class="comment-btn bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-xs">💬 Comment</button>
+            </div>
+        </div>
+
+        
+
+        <!-- Duplicate the cards until you have 12 -->
+    </div>
+</section>
+
+<script>
+function likePost(button) {
+    const countSpan = button.querySelector('.like-count');
+    let count = parseInt(countSpan.textContent);
+    count++;
+    countSpan.textContent = count;
+    button.classList.add('bg-blue-700');
+}
+
+function commentPost(button) {
+    const comment = prompt("Write your comment:");
+    if(comment && comment.trim() !== "") {
+        alert("Comment added: " + comment);
+    }
+}
+</script>
+
+</body>
+</html>

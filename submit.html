@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Incident | Seamudra</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --secondary: #0ea5e9;
+      --accent: #06b6d4;
+      --dark: #1e3a8a;
+      --light: #f0f9ff;
+    }
+    
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      min-height: 100vh;
+    }
+    
+    .navbar {
+      background: linear-gradient(90deg, var(--dark) 0%, var(--primary) 100%);
+      box-shadow: 0 4px 20px rgba(30, 64, 175, 0.3);
+    }
+    
+    .form-container {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    
+    .form-container:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
+    }
+    
+    .form-header {
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    .form-body {
+      padding: 2rem;
+    }
+    
+    .input-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+    }
+    
+    .input-group label i {
+      margin-right: 0.5rem;
+      color: var(--primary);
+    }
+    
+    .input-group input,
+    .input-group textarea,
+    .input-group select {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      border-radius: 0.8rem;
+      border: 2px solid #e2e8f0;
+      outline: none;
+      background: #f8fafc;
+      transition: all 0.3s;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .input-group input:focus,
+    .input-group textarea:focus,
+    .input-group select:focus {
+      border-color: var(--primary-light);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    }
+    
+    .threat-indicator {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+    }
+    
+    .threat-level {
+      width: 22%;
+      text-align: center;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+    
+    .threat-level:hover {
+      transform: translateY(-2px);
+    }
+    
+    .threat-level[data-level="Mild"] {
+      background-color: #dcfce7;
+      color: #166534;
+    }
+    
+    .threat-level[data-level="Moderate"] {
+      background-color: #fef9c3;
+      color: #854d0e;
+    }
+    
+    .threat-level[data-level="High"] {
+      background-color: #ffedd5;
+      color: #9a3412;
+    }
+    
+    .threat-level[data-level="Critical"] {
+      background-color: #fee2e2;
+      color: #991b1b;
+    }
+    
+    .threat-level.active {
+      box-shadow: 0 0 0 2px currentColor;
+      font-weight: 600;
+    }
+    
+    .image-upload {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1rem;
+    }
+    
+    .upload-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem 1.5rem;
+      background: var(--primary-light);
+      color: white;
+      border-radius: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+    
+    .upload-btn:hover {
+      background: var(--primary);
+      transform: translateY(-2px);
+    }
+    
+    .upload-btn i {
+      margin-right: 0.5rem;
+    }
+    
+    #previewContainer {
+      margin-top: 1.5rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    #previewImg {
+      max-width: 100%;
+      max-height: 250px;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1rem;
+      display: none;
+    }
+    
+    .remove-image {
+      padding: 0.5rem 1rem;
+      background: #fee2e2;
+      color: #dc2626;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      display: none;
+    }
+    
+    .remove-image:hover {
+      background: #fecaca;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 1.2rem;
+      border-radius: 0.8rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: white;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      margin-top: 1rem;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+    }
+    
+    .submit-btn:hover {
+      background: linear-gradient(90deg, var(--dark) 0%, var(--primary) 100%);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+      transform: translateY(-3px);
+    }
+    
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+    
+    .incident-counter {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      background: var(--light);
+      border-radius: 1rem;
+      font-weight: 500;
+      color: var(--dark);
+    }
+    
+    .counter-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0.5rem 0;
+    }
+    
+    .map-placeholder {
+      height: 200px;
+      background: #e2e8f0;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .map-placeholder:hover {
+      background: #d1d5db;
+    }
+    
+    @media (max-width: 768px) {
+      .form-container {
+        margin: 1rem;
+      }
+      
+      .threat-indicator {
+        flex-wrap: wrap;
+      }
+      
+      .threat-level {
+        width: 48%;
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Enhanced Navbar -->
+<nav class="navbar flex justify-between items-center px-6 py-4 text-white shadow-md">
+  <div class="flex items-center">
+    <i class="fas fa-water text-3xl mr-3"></i>
+    <h1 class="text-2xl font-bold">Seamudra</h1>
+  </div>
+  <a href="index_new.html" class="bg-white text-blue-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition flex items-center">
+    <i class="fas fa-home mr-2"></i> Back to Home
+  </a>
+</nav>
+
+<!-- Form Section -->
+<section class="py-8 px-4">
+  <div class="form-container max-w-2xl mx-auto">
+    <div class="form-header">
+      <i class="fas fa-exclamation-triangle text-4xl mb-3"></i>
+      <h2 class="text-3xl font-bold">Report Ocean Incident</h2>
+      <p class="mt-2 opacity-90">Help protect our oceans by reporting environmental threats</p>
+    </div>
+    
+    <div class="form-body">
+      <form id="incidentForm">
+        <div class="input-group">
+          <label for="name"><i class="fas fa-user"></i> Your Name</label>
+          <input type="text" id="name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="input-group">
+          <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+          <input type="email" id="email" placeholder="Your email for follow-up" required>
+        </div>
+
+        <div class="input-group">
+          <label for="location"><i class="fas fa-map-marker-alt"></i> Incident Location</label>
+          <input type="text" id="location" placeholder="Coordinates or location name" required>
+          <div class="map-placeholder">
+            <i class="fas fa-map-marked-alt mr-2"></i> Click to select location on map
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="incidentType"><i class="fas fa-biohazard"></i> Incident Type</label>
+          <select id="incidentType" required>
+            <option value="" disabled selected>Select incident type</option>
+            <option value="Oil Spill">Oil Spill</option>
+            <option value="Plastic Pollution">Plastic Pollution</option>
+            <option value="Chemical Discharge">Chemical Discharge</option>
+            <option value="Coral Bleaching">Coral Bleaching</option>
+            <option value="Overfishing">Overfishing</option>
+            <option value="Marine Life Distress">Marine Life Distress</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label><i class="fas fa-warning"></i> Threat Level</label>
+          <div class="threat-indicator">
+            <div class="threat-level" data-level="Mild">Mild</div>
+            <div class="threat-level" data-level="Moderate">Moderate</div>
+            <div class="threat-level" data-level="High">High</div>
+            <div class="threat-level" data-level="Critical">Critical</div>
+          </div>
+          <input type="hidden" id="threat" required>
+        </div>
+
+        <div class="input-group">
+          <label for="description"><i class="fas fa-file-alt"></i> Description</label>
+          <textarea id="description" placeholder="Describe the incident in detail..." rows="4" required></textarea>
+        </div>
+
+        <div class="input-group">
+          <label><i class="fas fa-camera"></i> Add Visual Evidence</label>
+          <div class="image-upload">
+            <div class="upload-btn">
+              <i class="fas fa-upload"></i> Upload Image
+              <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+            </div>
+            <p class="text-sm text-gray-500 mt-2">Or paste image URL below</p>
+            <input type="url" id="imageUrl" placeholder="Paste image URL" class="w-full mt-2">
+          </div>
+          
+          <div id="previewContainer">
+            <img id="previewImg" alt="Image preview">
+            <div class="remove-image" id="removeImage">
+              <i class="fas fa-times"></i> Remove Image
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="urgency"><i class="fas fa-clock"></i> Response Urgency</label>
+          <select id="urgency">
+            <option value="" disabled selected>How soon is response needed?</option>
+            <option value="Immediate">Immediate (within hours)</option>
+            <option value="Soon">Soon (within days)</option>
+            <option value="When Possible">When possible (within weeks)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-paper-plane mr-2"></i> Submit Report
+        </button>
+      </form>
+      
+      <div class="incident-counter">
+        <p>Total incidents reported this month:</p>
+        <div class="counter-number">247</div>
+        <p>Your report makes a difference!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('incidentForm');
+    const threatLevels = document.querySelectorAll('.threat-level');
+    const threatInput = document.getElementById('threat');
+    const imageUpload = document.getElementById('imageUpload');
+    const imageUrl = document.getElementById('imageUrl');
+    const previewImg = document.getElementById('previewImg');
+    const removeImage = document.getElementById('removeImage');
+    const uploadBtn = document.querySelector('.upload-btn');
+    
+    // Set up threat level selection
+    threatLevels.forEach(level => {
+      level.addEventListener('click', () => {
+        threatLevels.forEach(l => l.classList.remove('active'));
+        level.classList.add('active');
+        threatInput.value = level.getAttribute('data-level');
+      });
+    });
+    
+    // File upload functionality
+    uploadBtn.addEventListener('click', function() {
+      imageUpload.click();
+    });
+    
+    imageUpload.addEventListener('change', function(e) {
+      if (e.target.files && e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewImg.src = e.target.result;
+          previewImg.style.display = 'block';
+          removeImage.style.display = 'block';
+          imageUrl.value = ''; // Clear URL input
+        }
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    });
+    
+    // URL image preview
+    imageUrl.addEventListener('input', function() {
+      if (imageUrl.value.trim() !== "") {
+        previewImg.src = imageUrl.value;
+        previewImg.style.display = "block";
+        removeImage.style.display = "block";
+        imageUpload.value = ''; // Clear file input
+      }
+    });
+    
+    // Remove image
+    removeImage.addEventListener('click', function() {
+      previewImg.style.display = "none";
+      removeImage.style.display = "none";
+      imageUpload.value = '';
+      imageUrl.value = '';
+    });
+    
+    // Map placeholder click
+    document.querySelector('.map-placeholder').addEventListener('click', function() {
+      Swal.fire({
+        title: 'Location Selection',
+        html: 'Map integration would be implemented here<br><br>',
+        imageUrl: 'https://placeholder-image-service.onrender.com/image/400x200?prompt=Map%20with%20location%20pin&id=d12d98ea-cf54-44a8-895a-eecf29b8c79e',
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: 'Map location selection',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#2563eb',
+      });
+    });
+    
+    // Form submission
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Validate threat level selection
+      if (!threatInput.value) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please select a threat level',
+          confirmButtonColor: '#2563eb',
+        });
+        return;
+      }
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const location = document.getElementById('location').value;
+      const incidentType = document.getElementById('incidentType').value;
+      const threat = threatInput.value;
+      const description = document.getElementById('description').value;
+      const urgency = document.getElementById('urgency').value;
+      const image = previewImg.style.display !== 'none' ? previewImg.src : 'No image provided';
+
+      // Success popup
+      Swal.fire({
+        title: 'Report Submitted Successfully!',
+        html: `
+          <div style="text-align: left; line-height: 1.8;">
+            <p><b>Name:</b> ${name}</p>
+            <p><b>Email:</b> ${email}</p>
+            <p><b>Location:</b> ${location}</p>
+            <p><b>Incident Type:</b> ${incidentType}</p>
+            <p><b>Threat Level:</b> <span style="color: ${getThreatColor(threat)}; font-weight: bold">${threat}</span></p>
+            <p><b>Urgency:</b> ${urgency}</p>
+            <p><b>Description:</b> ${description}</p>
+          </div>
+          ${image !== 'No image provided' ? '<br><img src="'+image+'" style="max-width:100%; border-radius:12px; margin-top:10px;">' : ''}
+        `,
+        icon: 'success',
+        confirmButtonText: 'Done',
+        confirmButtonColor: '#2563eb',
+        width: '600px'
+      });
+
+      // Toast notification
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      });
+
+      Toast.fire({
+        icon: 'success',
+        title: `${threat} level incident reported at ${location}`
+      });
+
+      // Reset form
+      form.reset();
+      threatLevels.forEach(l => l.classList.remove('active'));
+      threatInput.value = '';
+      previewImg.style.display = 'none';
+      removeImage.style.display = 'none';
+    });
+    
+    // Helper function to get threat color
+    function getThreatColor(level) {
+      switch(level) {
+        case 'Mild': return '#166534';
+        case 'Moderate': return '#854d0e';
+        case 'High': return '#9a3412';
+        case 'Critical': return '#991b1b';
+        default: return '#000';
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

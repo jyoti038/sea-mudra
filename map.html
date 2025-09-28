@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seamudra | Ocean Threat Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; margin:0; padding:0; }
+        #map { height: 90vh; width: 100%; }
+        .leaflet-popup-content-wrapper { font-family: 'Poppins', sans-serif; }
+        .nav-btn { text-decoration: none; font-weight: 600; color: white; padding: 0.5rem 1rem; background: #1d4ed8; border-radius: 0.5rem; transition: background 0.3s; }
+        .nav-btn:hover { background: #2563eb; }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+<nav class="flex justify-between items-center p-4 bg-gradient-to-r from-blue-900 to-blue-700 text-white shadow-md">
+    <h1 class="text-2xl font-bold">🌊 Seamudra</h1>
+    <a href="index_new.html" class="nav-btn">Back to Home</a>
+</nav>
+
+<section class="p-4">
+    <h2 class="text-3xl font-bold text-blue-900 mb-4 text-center">🗺️ Ocean Threat Map</h2>
+    <div id="map"></div>
+</section>
+
+<script>
+    // Initialize the map centered on India
+    var map = L.map('map').setView([20.5937, 78.9629], 5);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Marker data: lat, lng, threat level, description
+    const threats = [
+        {lat: 18.96, lng: 72.82, level: 'Critical', desc: 'Oil Spill near Mumbai'},
+        {lat: 19.07, lng: 72.87, level: 'High', desc: 'Shipwreck off Mumbai'},
+        {lat: 20.27, lng: 85.84, level: 'Critical', desc: 'Cyclone near Odisha'},
+        {lat: 9.93, lng: 76.27, level: 'Moderate', desc: 'Flooding in Kerala'},
+        {lat: 15.49, lng: 73.83, level: 'Mild', desc: 'High tide in Goa'},
+        {lat: 11.66, lng: 92.75, level: 'High', desc: 'Tsunami warning in Andaman'},
+        {lat: 12.97, lng: 77.59, level: 'Moderate', desc: 'Plastic pollution in Bangalore coastal area'},
+        {lat: 21.15, lng: 72.82, level: 'Mild', desc: 'Algal bloom near Gujarat'},
+        {lat: 18.5, lng: 73.85, level: 'Critical', desc: 'Industrial waste spill'},
+        {lat: 8.96, lng: 78.12, level: 'High', desc: 'Strong cyclone alert'},
+        {lat: 22.57, lng: 88.36, level: 'Moderate', desc: 'Flooding in West Bengal coast'},
+        {lat: 17.38, lng: 78.48, level: 'Mild', desc: 'Minor oil leakage'}
+    ];
+
+    // Color for threat levels
+    const colors = {
+        'Mild': 'green',
+        'Moderate': 'yellow',
+        'High': 'orange',
+        'Critical': 'red'
+    };
+
+    threats.forEach(t => {
+        L.circleMarker([t.lat, t.lng], {
+            color: colors[t.level],
+            radius: 10,
+            fillOpacity: 0.7
+        }).addTo(map).bindPopup(`<b>${t.desc}</b><br>Threat Level: ${t.level}`);
+    });
+</script>
+
+</body>
+</html>

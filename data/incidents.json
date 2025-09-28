@@ -1,0 +1,15 @@
+[
+  {"title":"Oil Spill near Mumbai","lat":18.96,"lng":72.82,"severity":"alltime","description":"Major oil spill reported; cleanup ongoing.","time":"2025-09-18 02:00","image":"https://source.unsplash.com/random/800x600/?oil-spill"},
+  {"title":"Plastic dumping in Chennai Bay","lat":13.08,"lng":80.27,"severity":"critical","description":"Large volume of plastics spotted near shore.","time":"2025-09-17 11:00","image":"https://source.unsplash.com/random/800x600/?plastic-pollution"},
+  {"title":"Small fishing boat accident off Goa","lat":15.49,"lng":73.83,"severity":"average","description":"Boat struck rocks during storm; minor injuries.","time":"2025-09-16 08:20","image":"https://source.unsplash.com/random/800x600/?boat"},
+  {"title":"Coastal flooding at Kutch","lat":23.03,"lng":69.66,"severity":"critical","description":"Extreme tides causing inundation in low areas.","time":"2025-09-15 19:45","image":"https://source.unsplash.com/random/800x600/?flood"},
+  {"title":"Oil sheen detected near Vizag","lat":17.68,"lng":83.22,"severity":"average","description":"Thin oil sheen observed — monitoring.","time":"2025-09-14 09:12","image":"https://source.unsplash.com/random/800x600/?oil-sheen"},
+  {"title":"Massive trash pile at Sundarbans inlet","lat":21.95,"lng":88.66,"severity":"alltime","description":"Unusual accumulation of debris affecting mangroves.","time":"2025-09-13 06:30","image":"https://source.unsplash.com/random/800x600/?trash"},
+  {"title":"Unusual algal bloom off Kochi","lat":9.96,"lng":76.28,"severity":"average","description":"Discolored water, sampling ongoing.","time":"2025-09-12 12:00","image":"https://source.unsplash.com/random/800x600/?algae"},
+  {"title":"Cargo spill near Paradip port","lat":20.32,"lng":86.66,"severity":"critical","description":"Cargo containers lost overboard; debris present.","time":"2025-09-11 14:50","image":"https://source.unsplash.com/random/800x600/?cargo-ship"},
+  {"title":"Shoreline erosion alert — Puri","lat":19.81,"lng":85.82,"severity":"mild","description":"Gradual erosion noted near fishing huts.","time":"2025-09-10 07:00","image":"https://source.unsplash.com/random/800x600/?shoreline"},
+  {"title":"Diesel leak from tanker near Mumbai harbour","lat":18.95,"lng":72.82,"severity":"alltime","description":"Large leak reported; response teams deployed.","time":"2025-09-09 23:10","image":"https://source.unsplash.com/random/800x600/?oil-tanker"},
+  {"title":"Fishing net entanglement hotspots reported","lat":22.57,"lng":88.36,"severity":"mild","description":"Fishermen report increased net entanglements.","time":"2025-09-08 10:20","image":"https://source.unsplash.com/random/800x600/?fishing-net"},
+  {"title":"Strong winds — Gujarat coast","lat":22.30,"lng":70.78,"severity":"average","description":"High wind advisory for small craft.","time":"2025-09-07 16:00","image":"https://source.unsplash.com/random/800x600/?storm"},
+  {"title":"Fuel contamination reported at port", "lat":21.15,"lng":72.82,"severity":"critical","description":"Contaminated fuel affecting vessels' engines","time":"2025-09-06 12:00","image":"https://source.unsplash.com/random/800x600/?fuel"}
+]
